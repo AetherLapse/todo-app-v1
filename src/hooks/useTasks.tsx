@@ -58,7 +58,7 @@ export const useTasks = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setTasks(data || []);
+      setTasks(data as SupabaseTask[] || []);
     } catch (error: any) {
       toast({
         title: "Error fetching tasks",
@@ -78,7 +78,7 @@ export const useTasks = () => {
         .order('created_at', { ascending: true });
 
       if (error) throw error;
-      setSubtasks(data || []);
+      setSubtasks(data as SupabaseSubtask[] || []);
     } catch (error: any) {
       toast({
         title: "Error fetching subtasks",
@@ -98,7 +98,7 @@ export const useTasks = () => {
         .order('created_at', { ascending: true });
 
       if (error) throw error;
-      setCategories(data || []);
+      setCategories(data as SupabaseCategory[] || []);
     } catch (error: any) {
       toast({
         title: "Error fetching categories",
@@ -108,7 +108,7 @@ export const useTasks = () => {
     }
   };
 
-  const createTask = async (taskData: Partial<SupabaseTask>) => {
+  const createTask = async (taskData: Partial<SupabaseTask>): Promise<SupabaseTask | undefined> => {
     if (!user) return;
 
     try {
@@ -116,20 +116,21 @@ export const useTasks = () => {
         .from('tasks')
         .insert([{
           ...taskData,
-          user_id: user.id
+          user_id: user.id,
+          title: taskData.title!
         }])
         .select()
         .single();
 
       if (error) throw error;
       
-      setTasks(prev => [data, ...prev]);
+      setTasks(prev => [data as SupabaseTask, ...prev]);
       toast({
         title: "Task created",
         description: "Your new task has been added successfully."
       });
       
-      return data;
+      return data as SupabaseTask;
     } catch (error: any) {
       toast({
         title: "Error creating task",
@@ -139,7 +140,7 @@ export const useTasks = () => {
     }
   };
 
-  const updateTask = async (id: string, updates: Partial<SupabaseTask>) => {
+  const updateTask = async (id: string, updates: Partial<SupabaseTask>): Promise<SupabaseTask | undefined> => {
     try {
       const { data, error } = await supabase
         .from('tasks')
@@ -150,8 +151,8 @@ export const useTasks = () => {
 
       if (error) throw error;
       
-      setTasks(prev => prev.map(task => task.id === id ? data : task));
-      return data;
+      setTasks(prev => prev.map(task => task.id === id ? data as SupabaseTask : task));
+      return data as SupabaseTask;
     } catch (error: any) {
       toast({
         title: "Error updating task",
@@ -184,7 +185,7 @@ export const useTasks = () => {
     }
   };
 
-  const createSubtask = async (taskId: string, title: string) => {
+  const createSubtask = async (taskId: string, title: string): Promise<SupabaseSubtask | undefined> => {
     try {
       const { data, error } = await supabase
         .from('subtasks')
@@ -198,8 +199,8 @@ export const useTasks = () => {
 
       if (error) throw error;
       
-      setSubtasks(prev => [...prev, data]);
-      return data;
+      setSubtasks(prev => [...prev, data as SupabaseSubtask]);
+      return data as SupabaseSubtask;
     } catch (error: any) {
       toast({
         title: "Error creating subtask",
@@ -209,7 +210,7 @@ export const useTasks = () => {
     }
   };
 
-  const updateSubtask = async (id: string, updates: Partial<SupabaseSubtask>) => {
+  const updateSubtask = async (id: string, updates: Partial<SupabaseSubtask>): Promise<SupabaseSubtask | undefined> => {
     try {
       const { data, error } = await supabase
         .from('subtasks')
@@ -220,8 +221,8 @@ export const useTasks = () => {
 
       if (error) throw error;
       
-      setSubtasks(prev => prev.map(subtask => subtask.id === id ? data : subtask));
-      return data;
+      setSubtasks(prev => prev.map(subtask => subtask.id === id ? data as SupabaseSubtask : subtask));
+      return data as SupabaseSubtask;
     } catch (error: any) {
       toast({
         title: "Error updating subtask",
@@ -231,7 +232,7 @@ export const useTasks = () => {
     }
   };
 
-  const createCategory = async (name: string, color: string = 'bg-blue-500', icon: string = 'list') => {
+  const createCategory = async (name: string, color: string = 'bg-blue-500', icon: string = 'list'): Promise<SupabaseCategory | undefined> => {
     if (!user) return;
 
     try {
@@ -248,13 +249,13 @@ export const useTasks = () => {
 
       if (error) throw error;
       
-      setCategories(prev => [...prev, data]);
+      setCategories(prev => [...prev, data as SupabaseCategory]);
       toast({
         title: "Category created",
         description: "Your new category has been added successfully."
       });
       
-      return data;
+      return data as SupabaseCategory;
     } catch (error: any) {
       toast({
         title: "Error creating category",

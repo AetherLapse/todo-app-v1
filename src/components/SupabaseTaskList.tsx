@@ -4,7 +4,7 @@ import { format, isToday, isPast } from 'date-fns';
 import { useSupabaseTodo } from '@/contexts/SupabaseTodoContext';
 import { SupabaseTaskItem } from './SupabaseTaskItem';
 import { SupabaseAddTaskForm } from './SupabaseAddTaskForm';
-import { TaskSort } from './TaskSort';
+import { SupabaseTaskSort } from './SupabaseTaskSort';
 
 export const SupabaseTaskList = () => {
   const { state, tasks, categories } = useSupabaseTodo();
@@ -84,7 +84,7 @@ export const SupabaseTaskList = () => {
               {activeCount} active, {completedCount} completed
             </p>
           </div>
-          <TaskSort />
+          <SupabaseTaskSort />
         </div>
         
         {!state.selectedTask && <SupabaseAddTaskForm />}
