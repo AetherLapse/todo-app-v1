@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Plus, List, Calendar, Clock, AlertTriangle, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -57,6 +56,13 @@ export const SupabaseTodoSidebar = () => {
     ...categories
   ];
 
+  const handleAddTaskClick = () => {
+    // Reset selected task to null to show the add task form
+    setSelectedTask(null);
+    // Reset filter to show all tasks
+    setFilterBy('all');
+  };
+
   return (
     <aside className="w-80 bg-white border-r border-gray-200 flex-shrink-0">
       <div className="p-6">
@@ -64,7 +70,7 @@ export const SupabaseTodoSidebar = () => {
           <h2 className="text-xl font-semibold text-gray-900">Tasks</h2>
           <Button 
             size="sm" 
-            onClick={() => setSelectedTask(null)}
+            onClick={handleAddTaskClick}
             className="bg-blue-600 hover:bg-blue-700"
           >
             <Plus className="h-4 w-4 mr-1" />

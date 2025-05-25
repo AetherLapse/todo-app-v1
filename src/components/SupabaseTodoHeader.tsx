@@ -7,10 +7,26 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useSupabaseTodo } from '@/contexts/SupabaseTodoContext';
 import { useAuth } from '@/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export const SupabaseTodoHeader = () => {
   const { state, setSearchQuery } = useSupabaseTodo();
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      navigate('/auth');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
+  const handleProfileClick = () => {
+    // For now, just log the user info - you can extend this to navigate to a profile page
+    console.log('Profile clicked for user:', user?.email);
+  };
 
   return (
     <header className="bg-white border-b border-gray-200 p-4">
@@ -47,11 +63,11 @@ export const SupabaseTodoHeader = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleProfileClick}>
                 <User className="mr-2 h-4 w-4" />
                 Profile
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => signOut()}>
+              <DropdownMenuItem onClick={handleSignOut}>
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign Out
               </DropdownMenuItem>
