@@ -1,73 +1,148 @@
-# Welcome to your Lovable project
+# Advanced Todo Application
 
-## Project info
+A highly functional and visually clean Todo Application built using **Vite**, **React**, **TypeScript**, **Tailwind CSS**, and **shadcn/ui**, with **MongoDB** (via **Express.js** backend). This app allows you to efficiently manage tasks with rich features for organization, prioritization, and productivity.
 
-**URL**: https://lovable.dev/projects/31281270-47c4-42c7-b206-059bc5798ce0
+---
 
-## How can I edit this code?
+## 🚀 Features
 
-There are several ways of editing your application.
+### ✅ Core Functionality
 
-**Use Lovable**
+**Task Creation & Organization:**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/31281270-47c4-42c7-b206-059bc5798ce0) and start prompting.
+* Create new todos with title, due date, and priority.
+* Organize tasks into intuitive list views with clean UI components.
 
-Changes made via Lovable will be committed automatically to this repo.
+**Prioritization:**
 
-**Use your preferred IDE**
+* Choose between Low, Medium, or High priority.
+* Priorities are visually emphasized using Tailwind and shadcn/ui styling.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+**Reminders and Notifications:**
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+* Tasks display due dates to keep users informed.
+* (Planned) Reminder notifications for upcoming tasks.
 
-Follow these steps:
+**Completion Tracking:**
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+* Mark tasks as complete/incomplete with interactive UI elements.
+* Completed tasks are styled with visual indicators (e.g., strikethrough, faded text).
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+**Notes and Attachments (Planned):**
 
-# Step 3: Install the necessary dependencies.
-npm i
+* Add optional notes and future support for file attachments per task.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### ✨ Advanced Features (Planned/Optional Enhancements)
+
+**Integration with Other Tools:**
+
+* Integrate with Google Calendar or productivity apps via API.
+
+**Collaboration:**
+
+* Share task lists with others (requires user authentication system).
+
+**Subtasks & Dependencies:**
+
+* Enable subtasks and task dependencies.
+
+**Customization:**
+
+* Toggle themes (light/dark), sort and filter tasks, and customize views.
+
+**Progress Tracking:**
+
+* Visual progress indicators, task stats, and completion charts.
+
+---
+
+## 🛠 Tech Stack
+
+* **Frontend:**
+
+  * [Vite](https://vitejs.dev/) – blazing fast development server
+  * [React](https://react.dev/) – component-based UI
+  * [TypeScript](https://www.typescriptlang.org/) – static typing for scalability
+  * [Tailwind CSS](https://tailwindcss.com/) – utility-first styling
+  * [shadcn/ui](https://ui.shadcn.com/) – accessible, stylish component primitives
+
+* **Backend:**
+
+  * [Express.js](https://expressjs.com/) – backend API server
+  * [MongoDB](https://www.mongodb.com/) via [Mongoose](https://mongoosejs.com/) – database & schema modeling
+
+---
+
+## 📂 Project Structure
+
+```
+/                 → Root folder
+├── client/       → Vite + React frontend
+│   ├── src/
+│   │   ├── components/ → React UI components (using shadcn/ui)
+│   │   ├── pages/      → Page-level components
+│   │   ├── hooks/      → Custom hooks for task management
+│   │   └── utils/      → Utility functions and API client
+├── server/       → Express backend
+│   ├── routes/   → API endpoints (/api/todos)
+│   ├── models/   → Mongoose schemas
+│   └── server.js → Server entry point
+```
+
+---
+
+## 🧪 Running the App Locally
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/advanced-todo-app.git
+cd advanced-todo-app
+```
+
+### 2. Setup MongoDB
+
+Create a `.env` file in the `server` directory:
+
+```
+MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/todo_app
+```
+
+### 3. Install dependencies & run backend
+
+```bash
+cd server
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### 4. Install dependencies & run frontend
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+cd ../client
+npm install
+npm run dev
+```
 
-**Use GitHub Codespaces**
+### 5. Visit the app
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Open your browser at: `http://localhost:5173`
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## 📌 License
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+This project is open-source and available under the [MIT License](LICENSE).
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/31281270-47c4-42c7-b206-059bc5798ce0) and click on Share -> Publish.
+## 💡 Future Enhancements
 
-## Can I connect a custom domain to my Lovable project?
+* 🔐 User authentication and multi-user support
+* 🔔 Push notifications & reminders
+* 📊 Task insights and analytics
+* 📱 Mobile responsiveness and PWA support
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Happy tasking! 📝
