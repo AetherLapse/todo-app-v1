@@ -1,6 +1,6 @@
 # Advanced Todo Application
 
-A highly functional and visually clean Todo Application built using **Vite**, **React**, **TypeScript**, **Tailwind CSS**, and **shadcn/ui**, with **MongoDB** (via **Express.js** backend). This app allows you to efficiently manage tasks with rich features for organization, prioritization, and productivity.
+A highly functional and visually clean Todo Application built using **Vite**, **React**, **TypeScript**, **Tailwind CSS**, and **shadcn/ui**, with **Supabase** as the backend. This app allows you to efficiently manage tasks with rich features for organization, prioritization, and productivity.
 
 ---
 
@@ -68,8 +68,29 @@ A highly functional and visually clean Todo Application built using **Vite**, **
 
 * **Backend:**
 
-  * [Express.js](https://expressjs.com/) – backend API server
-  * [MongoDB](https://www.mongodb.com/) via [Mongoose](https://mongoosejs.com/) – database & schema modeling
+  * [Supabase](https://supabase.com/) – hosted backend with PostgreSQL, authentication, and real-time features
+
+---
+
+## 🧱 Supabase Database Schema
+
+### `tasks` Table
+
+| Column      | Type    | Description                         |
+| ----------- | ------- | ----------------------------------- |
+| id          | uuid    | Primary key                         |
+| user\_id    | uuid    | References authenticated user       |
+| title       | text    | Task title                          |
+| description | text    | Detailed task info                  |
+| completed   | boolean | Task completion status (true/false) |
+
+> You may also add: `due_date`, `priority`, `created_at`, `updated_at`, etc. for extended functionality.
+
+Additional tables (as shown):
+
+* `profiles` – to store user-specific info
+* `subtasks` – for managing nested task items
+* `categories` – to group or label tasks
 
 ---
 
@@ -82,11 +103,7 @@ A highly functional and visually clean Todo Application built using **Vite**, **
 │   │   ├── components/ → React UI components (using shadcn/ui)
 │   │   ├── pages/      → Page-level components
 │   │   ├── hooks/      → Custom hooks for task management
-│   │   └── utils/      → Utility functions and API client
-├── server/       → Express backend
-│   ├── routes/   → API endpoints (/api/todos)
-│   ├── models/   → Mongoose schemas
-│   └── server.js → Server entry point
+│   │   └── utils/      → Utility functions and Supabase client
 ```
 
 ---
@@ -100,26 +117,26 @@ git clone https://github.com/your-username/advanced-todo-app.git
 cd advanced-todo-app
 ```
 
-### 2. Setup MongoDB
+### 2. Setup Supabase
 
-Create a `.env` file in the `server` directory:
+* Go to [https://supabase.com/](https://supabase.com/)
+* Create a new project
+* Create a `tasks` table with the fields listed above
+* Get your `anon` key and project `url` from project settings
+
+### 3. Create `.env` file
+
+Create a `.env` file in the root of the `client` directory:
 
 ```
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/todo_app
-```
-
-### 3. Install dependencies & run backend
-
-```bash
-cd server
-npm install
-npm run dev
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
 ```
 
 ### 4. Install dependencies & run frontend
 
 ```bash
-cd ../client
+cd client
 npm install
 npm run dev
 ```
@@ -138,7 +155,6 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ## 💡 Future Enhancements
 
-* 🔐 User authentication and multi-user support
 * 🔔 Push notifications & reminders
 * 📊 Task insights and analytics
 * 📱 Mobile responsiveness and PWA support
